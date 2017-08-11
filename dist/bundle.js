@@ -184,6 +184,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__style_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__style_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ship_list_vue__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sector_list_vue__ = __webpack_require__(21);
+
 
 
 
@@ -191,8 +193,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // create a root instance
 new __WEBPACK_IMPORTED_MODULE_2_vue__["a" /* default */]({
-	el: '#ship-list',
-	render: h => h(__WEBPACK_IMPORTED_MODULE_3__ship_list_vue__["a" /* default */]),
+	el: '#sector-list',
+	render: h => h(__WEBPACK_IMPORTED_MODULE_4__sector_list_vue__["a" /* default */], {
+		props: {
+			sectors: [
+				{
+					name: "Sector 1",
+					ships: [
+						{
+							'name': 'Ship A',
+							'class': 'Class A',
+						},
+						{
+							'name': 'Ship B',
+							'class': 'Class B',
+						},
+						{
+							'name': 'Ship C',
+							'class': 'Class B',
+						},
+					],
+				},
+				{
+					name: "Sector 2",
+					ships: [
+						{
+							'name': 'Ship D',
+							'class': 'Class A',
+						},
+					],
+				},
+			],
+		},
+	}),
 })
 
 
@@ -25528,7 +25561,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.ship-name {\n\tfont-weight: bold;\n}\n.ship-class {\n}\n", ""]);
+exports.push([module.i, "\n.ship-name {\n\tfont-weight: bold;\n}\n.ship-class {\n}\n.sector-name {\n\tfont-size: 20;\n}\n", ""]);
 
 // exports
 
@@ -25903,46 +25936,32 @@ module.exports = function normalizeComponent (
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
-	
+
+
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	name: 'ship-list',
+	props: {
+		'sector': {
+			type: Object,
+			required: true,
+		},
+	},
 	components: {
 		'draggable': __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default.a,
 	},
-	data () {
-		return {
-			ship_array_1: [
-				{
-					'name': 'Ship A',
-					'class': 'Class A',
-				},
-				{
-					'name': 'Ship B',
-					'class': 'Class B',
-				},
-				{
-					'name': 'Ship C',
-					'class': 'Class B',
-				},
-			],
-			ship_array_2: [
-				{
-					'name': 'Ship D',
-					'class': 'Class A',
-				},
-			],
-		}
-	}
+	computed: {
+		// sector_name: () => {
+		// 	return this.sector.name;
+		// },
+		// ships: () => {
+		// 	return this.sector.ships;
+		// },
+		draggable_options: () => {
+			return { group: "ships-draggable-group" };
+		},
+	},
 });
 
 
@@ -27833,14 +27852,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**!
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "sector_list"
-  }, [_vm._v("\" v-model=\"ship_array_1\" @start=\"drag=true\" @end=\"drag=false\">\n\t\t"), _vm._l((_vm.ship_array_1), function(ship) {
-    return _c('div', [_c('span', {
-      staticClass: "ship-name"
-    }, [_vm._v("#" + _vm._s(ship.name))]), _vm._v(" "), _c('span', {
-      staticClass: "ship-class"
-    }, [_vm._v("#" + _vm._s(ship.class))])])
-  }), _vm._v(" "), _c('draggable', {
+    staticClass: "sector"
+  }, [_c('div', {
+    staticClass: "sector-name"
+  }, [_vm._v(_vm._s(_vm.sector.name))]), _vm._v(" "), _c('draggable', {
+    attrs: {
+      "options": _vm.draggable_options
+    },
     on: {
       "start": function($event) {
         _vm.drag = true
@@ -27850,19 +27868,19 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       }
     },
     model: {
-      value: (_vm.ship_array_2),
+      value: (_vm.sector.ships),
       callback: function($$v) {
-        _vm.ship_array_2 = $$v
+        _vm.sector.ships = $$v
       },
-      expression: "ship_array_2"
+      expression: "sector.ships"
     }
-  }, _vm._l((_vm.ship_array_2), function(ship) {
+  }, _vm._l((_vm.sector.ships), function(ship) {
     return _c('div', [_c('span', {
       staticClass: "ship-name"
-    }, [_vm._v("#" + _vm._s(ship.name))]), _vm._v(" "), _c('span', {
+    }, [_vm._v(_vm._s(ship.name))]), _vm._v(" "), _c('span', {
       staticClass: "ship-class"
-    }, [_vm._v("#" + _vm._s(ship.class))])])
-  }))], 2)
+    }, [_vm._v("(" + _vm._s(ship.class) + ")")])])
+  }))], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -27872,6 +27890,167 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-036050d0", esExports)
+  }
+}
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_sector_list_vue__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_43c49ca6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_sector_list_vue__ = __webpack_require__(25);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(22)
+}
+var normalizeComponent = __webpack_require__(16)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_sector_list_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_43c49ca6_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_sector_list_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src/sector-list.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] sector-list.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-43c49ca6", Component.options)
+  } else {
+    hotAPI.reload("data-v-43c49ca6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(23);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(14)("4141c8d8", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-43c49ca6\",\"scoped\":false,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sector-list.vue", function() {
+     var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-43c49ca6\",\"scoped\":false,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./sector-list.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.sector-list-class {\n\tdisplay: flex;\n\tjustify-content: space-around;\n}\n.sector-box-class {\n\tpadding: 10;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ship_list_vue__ = __webpack_require__(11);
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	name: 'sector-list',
+	props: {
+		'sectors': {
+			type: Array,
+			required: true,
+		},
+	},
+	components: {
+		'ship-list': __WEBPACK_IMPORTED_MODULE_0__ship_list_vue__["a" /* default */],
+	},
+});
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "sector-list-class",
+    model: {
+      value: (_vm.sectors),
+      callback: function($$v) {
+        _vm.sectors = $$v
+      },
+      expression: "sectors"
+    }
+  }, _vm._l((_vm.sectors), function(sector) {
+    return _c('div', {
+      staticClass: "sector-box-class"
+    }, [_c('ship-list', {
+      attrs: {
+        "sector": sector
+      }
+    })], 1)
+  }))
+}
+var staticRenderFns = []
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-43c49ca6", esExports)
   }
 }
 
