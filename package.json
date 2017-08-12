@@ -8,7 +8,7 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "webpack",
-		"watch": "webpack --watch"
+		"watch": "webpack --progress --watch"
 	},
 	"devDependencies": {
 		"css-loader": "^0.28.4",

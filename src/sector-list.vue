@@ -1,6 +1,6 @@
 <template>
-  <div class="sector-list-class" v-model="sectors">
-	<div class="sector-box-class" v-for="sector in sectors">
+  <div class="sector-list-class" v-model="sector_data">
+	<div v-for="sector in sector_data" :key="sector.id" class="sector-box-class">
 	  <ship-list :sector="sector"></ship-list>
 	</div>
   </div>
@@ -8,7 +8,7 @@
 
 <script>
 
-import ship_list from './ship-list.vue';
+import ShipList from './ship-list.vue';
 
 export default {
 	name: 'sector-list',
@@ -19,7 +19,12 @@ export default {
 		},
 	},
 	components: {
-		'ship-list': ship_list,
+		ShipList,
+	},
+	data () {
+		return {
+			sector_data: this.sectors,
+		}
 	},
 }
 </script>

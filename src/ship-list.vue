@@ -1,8 +1,8 @@
 <template>
-  <div class="sector">
-	<div class="sector-name">{{sector.name}}</div>
-	<draggable v-model="sector.ships" :options="draggable_options" @start="drag=true" @end="drag=false">
-	  <div v-for="ship in sector.ships">
+  <div>
+	<div class="sector-name-class">{{sector.name}}</div>
+	<draggable v-model="ships_data" :options="draggable_options" @start="drag=true" @end="drag=false">
+	  <div v-for="ship in ships_data" :key="ship.id" class="ship-list-box-class">
 		<span class="ship-name">{{ship.name}}</span>
 		<span class="ship-class">({{ship.class}})</span>
 	  </div>
@@ -25,13 +25,12 @@ export default {
 	components: {
 		'draggable': draggable,
 	},
+	data () {
+		return {
+			ships_data: this.sector.ships,
+		}
+	},
 	computed: {
-		// sector_name: () => {
-		// 	return this.sector.name;
-		// },
-		// ships: () => {
-		// 	return this.sector.ships;
-		// },
 		draggable_options: () => {
 			return { group: "ships-draggable-group" };
 		},
