@@ -1,7 +1,7 @@
 <template>
   <div>
 	<div v-for="sector in sectors">
-	  <sector sector="sector"></sector>
+	  <Sector sector="sector"></Sector>
 	</div>
   </div>
 </template>
@@ -9,6 +9,20 @@
 
 <script>
 
+import Sector from './sector.vue';
+import { mapGetters } from 'vuex';
+
+export default {
+	name: 'sector',
+	components: {
+		Sector,
+	},
+	computed: {
+		...mapGetters({
+			sectors: 'sectors',
+		}),
+	},
+};
 </script>
 
 
