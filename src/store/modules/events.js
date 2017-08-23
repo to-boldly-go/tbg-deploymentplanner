@@ -1,4 +1,5 @@
 import * as types from '../mutation-types';
+import _ from 'lodash';
 
 const state = {
 	all_events: [],
@@ -21,7 +22,7 @@ const mutations = {
 	},
 
 	[types.EVENT_ASSIGN_TO_SECTOR] (state, payload) {
-		var new_id = Math.max(...state.all_events.map(ev => ev.id)) + 1;
+		const new_id = Math.max(...state.all_events.map(ev => ev.id), 0) + 1;
 		state.all_events.push({
 			id: new_id,
 			type: types.EVENT_ASSIGN_TO_SECTOR,

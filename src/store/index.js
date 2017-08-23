@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import events from './modules/events';
+import timestamps from './modules/timestamps';
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
 	},
 	modules: {
 		events,
+		timestamps,
 	},
 	strict: debug,
 });

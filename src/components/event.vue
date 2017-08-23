@@ -1,6 +1,7 @@
 <template>
-  <div>
-	<EventAssignToSector v-if="event.type == types.EVENT_ASSIGN_TO_SECTOR" :assignment="event"></EventAssignToSector>
+  <div class="event-box">
+	<span><EventAssignToSector v-if="event.type == types.EVENT_ASSIGN_TO_SECTOR" :assignment="event"></EventAssignToSector></span>
+	<span><button @click="delete_event()">X</button></span>
   </div>
 </template>
 
@@ -27,6 +28,13 @@ export default {
 			return types;
 		},
 	},
+	methods: {
+		delete_event () {
+			this.$store.commit(types.DELETE_EVENT, {
+				event_id: this.event.id,
+			});
+		},
+	},
 };
 
 
@@ -34,5 +42,15 @@ export default {
 
 
 <style>
+.event-box {
+	display: flex;
+}
 
+.event-type-box {
+	display: 10 0 auto;
+}
+
+.event-del-button {
+	display: 1 0 auto;
+}
 </style>

@@ -34,7 +34,7 @@ interact('.sector-box-class')
 	.allowFrom('.sector-name-class');
 
 function dragMoveListener(event) {
-	var target = event.target,
+	let target = event.target,
 		x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
 		y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
